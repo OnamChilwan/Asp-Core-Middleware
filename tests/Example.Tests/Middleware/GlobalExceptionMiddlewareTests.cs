@@ -6,9 +6,8 @@
 
     using Example.Middleware;
 
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Http;
-    using Microsoft.AspNet.TestHost;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
 
     using Xunit;
 
@@ -17,8 +16,8 @@
         [Fact]
         public async Task When_An_Exception_Is_Raised_Then_Handle_And_Return_Server_Error()
         {
-            using (var server = TestServer.Create(
-                (app) =>
+            using (var server = TestHelper.CreateServer(
+                app =>
                 {
                     app.UseMiddleware<GlobalExceptionMiddleware>();
                     app.UseMiddleware<FakeMiddlware>();

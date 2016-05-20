@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/src/Example/bin/Debug/netcoreapp1.0
+/src/Example/obj/Debug
+/tests/Example.Tests/bin/Debug/netcoreapp1.0
+/tests/Example.Tests/obj/Debug
+*.user
+*.suo

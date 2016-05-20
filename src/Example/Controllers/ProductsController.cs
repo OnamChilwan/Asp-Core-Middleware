@@ -4,10 +4,10 @@
 
     using Example.Queries;
 
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     [Route("api")]
-    public class ProductsController : Controller
+    public class ProductsController
     {
         private readonly IGetProductsQuery getProductsQuery;
 
@@ -19,7 +19,9 @@
         [HttpGet("products")]
         public async Task<IActionResult> Get()
         {
-            return this.Ok(await this.getProductsQuery.Execute());
+            var products = await this.getProductsQuery.Execute();
+
+            return new OkObjectResult(products);
         }
     }
 }

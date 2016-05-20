@@ -7,8 +7,7 @@
 
     using Example.Middleware;
 
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.TestHost;
+    using Microsoft.AspNetCore.Builder;
 
     using Xunit;
 
@@ -19,7 +18,11 @@
         {
             HttpResponseMessage result;
 
-            using (var server = TestServer.Create((app) => { app.UseMiddleware<StandardHeaderMiddleware>(); }))
+            using (var server = TestHelper.CreateServer(
+                app =>
+                {
+                    app.UseMiddleware<StandardHeaderMiddleware>();
+                }))
             {
                 result = await server.CreateRequest("/").GetAsync();
             }

@@ -9,7 +9,7 @@
     using Example.Models;
     using Example.Queries;
 
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
 
     using Xunit;
 
@@ -19,10 +19,10 @@
         public async Task When_Successfully_Requesting_Products()
         {
             var subject = new ProductsController(new TestDoubleGetProductsQuery());
-            var result = await subject.Get() as HttpOkObjectResult;
-            var products = ((IEnumerable<Product>)result.Value).ToList();
+            var result = await subject.Get() as OkObjectResult;
+            var products = ((IEnumerable<Product>)result?.Value).ToList();
 
-            Assert.Equal(result.StatusCode, (int)HttpStatusCode.OK);
+            Assert.Equal(result?.StatusCode, (int)HttpStatusCode.OK);
 
             Assert.Equal(products[0].Code, "ABC");
             Assert.Equal(products[0].Description, "Testing");
